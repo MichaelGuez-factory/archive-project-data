@@ -52,8 +52,8 @@ function archiveItems_v2(scoroIdsToArchive) {
       const targetSheetName = `Pdata_Project Archive_Current`;
       const targetSheetTabName = `Items`;
 
-      const target_ss = SpreadsheetApp.openById(targetSheetId);
-      const target_sheet = target_ss.getSheetByName(targetSheetTabName);
+      const target_ss = openSpreadsheetSafe(targetSheetId, targetSheetName);
+      const target_sheet = getSheetSafe(target_ss, targetSheetTabName, targetSheetName);
       const lastRow = target_sheet.getLastRow();
 
 

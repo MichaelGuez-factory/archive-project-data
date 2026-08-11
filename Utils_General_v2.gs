@@ -34,12 +34,36 @@ function getListOfprojectReferencesForArchive(thresholdDate, projectsToArchive) 
 
 function collectData(sheetId, spreadsheetFirstRowNumber, spreadsheetFirstColumnNumber, spreadsheetName, spreadsheetTabName) {
 
-  const ss = SpreadsheetApp.openById(sheetId);
-  const spreadsheetTab = ss.getSheetByName(spreadsheetTabName);
-  const spreadsheetTabFirstColumn = spreadsheetTab.getRange(spreadsheetFirstRowNumber, spreadsheetFirstColumnNumber, spreadsheetTab.getLastRow(), 1).getValues();
+  const ss = openSpreadsheetSafe(sheetId, spreadsheetName);
+  const spreadsheetTab = getSheetSafe(ss, spreadsheetTabName, spreadsheetName);
+  
+  const lastRow = spreadsheetTab.getLastRow();
+  const maxAvailableRows = lastRow - spreadsheetFirstRowNumber + 1;
+  
+  if (maxAvailableRows <= 0) {
+    Logger.log(`[INFO] No data rows found starting from row ${spreadsheetFirstRowNumber} in ${spreadsheetName} (${spreadsheetTabName}).`);
+    return [];
+  }
+
+  const spreadsheetTabFirstColumn = getRangeValuesSafe(
+    spreadsheetTab, 
+    spreadsheetFirstRowNumber, 
+    spreadsheetFirstColumnNumber, 
+    maxAvailableRows, 
+    1, 
+    `${spreadsheetName} -> ${spreadsheetTabName} (first column)`
+  );
+  
   const spreadsheetLastRowOfData = getLastRowOfData(spreadsheetTabFirstColumn, spreadsheetFirstRowNumber);
-  const spreadsheetTotalRowCount = spreadsheetLastRowOfData - spreadsheetFirstRowNumber + 1 // Add one back to account for the first row itself
+  const spreadsheetTotalRowCount = spreadsheetLastRowOfData - spreadsheetFirstRowNumber + 1; // Add one back to account for the first row itself
+  
+  if (spreadsheetTotalRowCount <= 0) {
+    Logger.log(`[INFO] Calculated total row count is non-positive for ${spreadsheetName} (${spreadsheetTabName}).`);
+    return [];
+  }
+  
   const spreadsheetTotalColumnCount = spreadsheetTab.getLastColumn() - spreadsheetFirstColumnNumber + 1; // Add one back to account for the first column itself
+  
   Logger.log(`********** Collecting data from sheet(${spreadsheetName}), tab (${spreadsheetTabName}) **********`)
   Logger.log(`First row of data for sheet(${spreadsheetName}), tab (${spreadsheetTabName}): ` + spreadsheetFirstRowNumber)
   Logger.log(`Actual last row of sheet(${spreadsheetName}), tab (${spreadsheetTabName}): ` + spreadsheetLastRowOfData);
@@ -47,7 +71,14 @@ function collectData(sheetId, spreadsheetFirstRowNumber, spreadsheetFirstColumnN
   Logger.log(`********** End data collection from sheet(${spreadsheetName}), tab (${spreadsheetTabName}) **********`)
   Logger.log(``);
 
-  const collectedData = spreadsheetTab.getRange(spreadsheetFirstRowNumber, spreadsheetFirstColumnNumber, spreadsheetTotalRowCount, spreadsheetTotalColumnCount).getValues();
+  const collectedData = getRangeValuesSafe(
+    spreadsheetTab, 
+    spreadsheetFirstRowNumber, 
+    spreadsheetFirstColumnNumber, 
+    spreadsheetTotalRowCount, 
+    spreadsheetTotalColumnCount, 
+    `${spreadsheetName} -> ${spreadsheetTabName}`
+  );
 
   return collectedData;
 
@@ -57,11 +88,33 @@ function collectData(sheetId, spreadsheetFirstRowNumber, spreadsheetFirstColumnN
 
 function collectDataByDefinedRange(sheetId, spreadsheetFirstRowNumber, spreadsheetFirstColumnNumber, spreadsheetName, spreadsheetTabName, spreadsheetTotalColumnCount) {
 
-  const ss = SpreadsheetApp.openById(sheetId);
-  const spreadsheetTab = ss.getSheetByName(spreadsheetTabName);
-  const spreadsheetTabFirstColumn = spreadsheetTab.getRange(spreadsheetFirstRowNumber, spreadsheetFirstColumnNumber, spreadsheetTab.getLastRow(), 1).getValues();
+  const ss = openSpreadsheetSafe(sheetId, spreadsheetName);
+  const spreadsheetTab = getSheetSafe(ss, spreadsheetTabName, spreadsheetName);
+  
+  const lastRow = spreadsheetTab.getLastRow();
+  const maxAvailableRows = lastRow - spreadsheetFirstRowNumber + 1;
+  
+  if (maxAvailableRows <= 0) {
+    Logger.log(`[INFO] No data rows found starting from row ${spreadsheetFirstRowNumber} in ${spreadsheetName} (${spreadsheetTabName}).`);
+    return [];
+  }
+
+  const spreadsheetTabFirstColumn = getRangeValuesSafe(
+    spreadsheetTab, 
+    spreadsheetFirstRowNumber, 
+    spreadsheetFirstColumnNumber, 
+    maxAvailableRows, 
+    1, 
+    `${spreadsheetName} -> ${spreadsheetTabName} (first column)`
+  );
+  
   const spreadsheetLastRowOfData = getLastRowOfData(spreadsheetTabFirstColumn, spreadsheetFirstRowNumber);
-  const spreadsheetTotalRowCount = spreadsheetLastRowOfData - spreadsheetFirstRowNumber + 1 // Add one back to account for the first row itself
+  const spreadsheetTotalRowCount = spreadsheetLastRowOfData - spreadsheetFirstRowNumber + 1; // Add one back to account for the first row itself
+
+  if (spreadsheetTotalRowCount <= 0) {
+    Logger.log(`[INFO] Calculated total row count is non-positive for ${spreadsheetName} (${spreadsheetTabName}).`);
+    return [];
+  }
 
   Logger.log(`********** Collecting data from sheet(${spreadsheetName}), tab (${spreadsheetTabName}) **********`)
   Logger.log(`First row of data for sheet(${spreadsheetName}), tab (${spreadsheetTabName}): ` + spreadsheetFirstRowNumber)
@@ -70,7 +123,14 @@ function collectDataByDefinedRange(sheetId, spreadsheetFirstRowNumber, spreadshe
   Logger.log(`********** End data collection from sheet(${spreadsheetName}), tab (${spreadsheetTabName}) **********`)
   Logger.log(``);
 
-  const collectedData = spreadsheetTab.getRange(spreadsheetFirstRowNumber, spreadsheetFirstColumnNumber, spreadsheetTotalRowCount, spreadsheetTotalColumnCount).getValues();
+  const collectedData = getRangeValuesSafe(
+    spreadsheetTab, 
+    spreadsheetFirstRowNumber, 
+    spreadsheetFirstColumnNumber, 
+    spreadsheetTotalRowCount, 
+    spreadsheetTotalColumnCount, 
+    `${spreadsheetName} -> ${spreadsheetTabName}`
+  );
 
   return collectedData;
 
@@ -111,8 +171,8 @@ function getLastRowOfData(spreadsheetSelectedColumn, spreadsheetFirstRowNumber) 
 function findHeader(sourceId, sourceTab, sourceSheetName, searchField, targetHeader) {
 
   Logger.log(`********** Searching for headers in sheet(${sourceSheetName}), tab (${sourceTab}) **********`);
-  const ss = SpreadsheetApp.openById(sourceId);
-  const sheet = ss.getSheetByName(sourceTab);
+  const ss = openSpreadsheetSafe(sourceId, sourceSheetName);
+  const sheet = getSheetSafe(ss, sourceTab, sourceSheetName);
 
   /*Get Header Row Number by searching for value*/
   const data = sheet.getRange(searchField).getValues();
@@ -139,6 +199,53 @@ function findHeader(sourceId, sourceTab, sourceSheetName, searchField, targetHea
 
   }
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Robust safe wrappers for logging, performance auditing, and try-catch safety
+
+function openSpreadsheetSafe(id, description) {
+  const start = Date.now();
+  Logger.log(`[DEBUG] Opening spreadsheet: "${description}" (ID: ${id})...`);
+  try {
+    const ss = SpreadsheetApp.openById(id);
+    Logger.log(`[DEBUG] Successfully opened "${description}" in ${Date.now() - start}ms`);
+    return ss;
+  } catch (e) {
+    Logger.log(`[ERROR] Failed to open spreadsheet "${description}" (ID: ${id}): ${e.toString()}`);
+    throw e;
+  }
+}
+
+function getSheetSafe(ss, tabName, description) {
+  Logger.log(`[DEBUG] Fetching tab "${tabName}" from "${description}"...`);
+  try {
+    const sheet = ss.getSheetByName(tabName);
+    if (!sheet) {
+      throw new Error(`Tab "${tabName}" not found in spreadsheet "${description}"`);
+    }
+    return sheet;
+  } catch (e) {
+    Logger.log(`[ERROR] getSheetSafe failed for tab "${tabName}" from "${description}": ${e.toString()}`);
+    throw e;
+  }
+}
+
+function getRangeValuesSafe(sheet, startRow, startCol, numRows, numCols, description) {
+  const start = Date.now();
+  Logger.log(`[DEBUG] Reading values from "${description}" (Range: StartRow=${startRow}, StartCol=${startCol}, Rows=${numRows}, Cols=${numCols})...`);
+  try {
+    if (numRows <= 0 || numCols <= 0) {
+      throw new Error(`Invalid range size: Rows=${numRows}, Cols=${numCols}`);
+    }
+    const values = sheet.getRange(startRow, startCol, numRows, numCols).getValues();
+    Logger.log(`[DEBUG] Successfully read ${values.length} rows from "${description}" in ${Date.now() - start}ms`);
+    return values;
+  } catch (e) {
+    Logger.log(`[ERROR] Failed to read range values from "${description}": ${e.toString()}`);
+    throw e;
+  }
+}
+
 
 
 

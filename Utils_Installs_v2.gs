@@ -59,8 +59,8 @@ function archiveInstalls_v2(thresholdDate, activeProjectList) {
     const targetSheetName = `Pdata_Project Archive_Current`;
     const targetSheetTabName = `Installs`;
 
-    const target_ss = SpreadsheetApp.openById(targetSheetId);
-    const target_sheet = target_ss.getSheetByName(targetSheetTabName);
+    const target_ss = openSpreadsheetSafe(targetSheetId, targetSheetName);
+    const target_sheet = getSheetSafe(target_ss, targetSheetTabName, targetSheetName);
     const lastRow = target_sheet.getLastRow();
 
 
@@ -86,8 +86,8 @@ function removeInstalls_v2(thresholdDate, activeProjectList) {
   const sourceSheetName = `TFNYC Install Schedule Utility_v100`;
   const sourceSheetTabName = `Install Schedule`;
   const sourceSheetTotalColumnCount = 13; //Only pull data up to column N (14).  Since the data starts at column 2, I subtracted 1.
-  const ss = SpreadsheetApp.openById(sourceSheetId);
-  const sheet = ss.getSheetByName(sourceSheetTabName);
+  const ss = openSpreadsheetSafe(sourceSheetId, sourceSheetName);
+  const sheet = getSheetSafe(ss, sourceSheetTabName, sourceSheetName);
 
   const collectedData = collectDataByDefinedRange(sourceSheetId, sourceSheetFirstRowNumber, sourceSheetFirstColumnNumber, sourceSheetName, sourceSheetTabName, sourceSheetTotalColumnCount);
   //Logger.log(`Collected Install Data: `);

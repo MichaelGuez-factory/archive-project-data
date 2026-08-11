@@ -50,8 +50,8 @@ function archiveRouting_v2(scoroIdsToArchive) {
       const targetSheetName = `Pdata_Project Archive_Current`;
       const targetSheetTabName = `Routing`;
 
-      const target_ss = SpreadsheetApp.openById(targetSheetId);
-      const target_sheet = target_ss.getSheetByName(targetSheetTabName);
+      const target_ss = openSpreadsheetSafe(targetSheetId, targetSheetName);
+      const target_sheet = getSheetSafe(target_ss, targetSheetTabName, targetSheetName);
       const lastRow = target_sheet.getLastRow();
 
 
@@ -80,8 +80,8 @@ function removeRouting_v2(scoroIdsToArchive) {
     const sourceSheetName = `Pdata_Active Projects`;
     const sourceSheetTabName = `Routing`;
     const sourceSheetTotalColumnCount = 18; //Only pull data up to column R (18).  There are calculated values starting with column S.
-    const ss = SpreadsheetApp.openById(sourceSheetId);
-    const sheet = ss.getSheetByName(sourceSheetTabName);
+    const ss = openSpreadsheetSafe(sourceSheetId, sourceSheetName);
+    const sheet = getSheetSafe(ss, sourceSheetTabName, sourceSheetName);
 
     const collectedData = collectDataByDefinedRange(sourceSheetId, sourceSheetFirstRowNumber, sourceSheetFirstColumnNumber, sourceSheetName, sourceSheetTabName, sourceSheetTotalColumnCount);
 

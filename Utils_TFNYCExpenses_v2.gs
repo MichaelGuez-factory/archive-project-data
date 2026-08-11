@@ -53,8 +53,8 @@ function archiveTFNYCExpenses_v2(projectReferencesToArchive) {
       const targetSheetName = `Pdata_Project Archive_Current`;
       const targetSheetTabName = `Archived Project Expenses`;
 
-      const target_ss = SpreadsheetApp.openById(targetSheetId);
-      const target_sheet = target_ss.getSheetByName(targetSheetTabName);
+      const target_ss = openSpreadsheetSafe(targetSheetId, targetSheetName);
+      const target_sheet = getSheetSafe(target_ss, targetSheetTabName, targetSheetName);
       const lastRow = target_sheet.getLastRow();
 
 
@@ -94,8 +94,8 @@ function removeExpenses_v2(projectReferencesToArchive) {
 
       const sourceSheetFirstRowNumber = sourceHeaderRowNumber + 1;
       const sourceSheetTotalColumnCount = 10; //Only pull data up to column K (11).  Since the data starts at column 2, I subtracted 1.
-      const ss = SpreadsheetApp.openById(sourceSheetId);
-      const sheet = ss.getSheetByName(sourceSheetTabName);
+      const ss = openSpreadsheetSafe(sourceSheetId, sourceSheetName);
+      const sheet = getSheetSafe(ss, sourceSheetTabName, sourceSheetName);
 
       //Do no execute if a header row was not found (findHeader returned 0)
       let collectedData = [];

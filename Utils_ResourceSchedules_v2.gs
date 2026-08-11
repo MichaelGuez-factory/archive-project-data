@@ -82,8 +82,8 @@ function archiveProductionResourceSchedules_v2() {
   /*Append to Archive*/
   if (dataToArchive.length > 0) {
 
-    const targetSheet = SpreadsheetApp.openById(targetSheetId);
-    const targetTab = targetSheet.getSheetByName(targetTabName);
+    const targetSheet = openSpreadsheetSafe(targetSheetId, targetSheetName);
+    const targetTab = getSheetSafe(targetSheet, targetTabName, targetSheetName);
     const targetTabLastRow = targetTab.getLastRow();
 
 
@@ -188,8 +188,8 @@ function archivePreProductionResourceSchedules_v2() {
   /*Append to Archive*/
   if (dataToArchive.length > 0) {
 
-    const targetSheet = SpreadsheetApp.openById(targetSheetId);
-    const targetTab = targetSheet.getSheetByName(targetTabName);
+    const targetSheet = openSpreadsheetSafe(targetSheetId, targetSheetName);
+    const targetTab = getSheetSafe(targetSheet, targetTabName, targetSheetName);
     const targetTabLastRow = targetTab.getLastRow();
 
 

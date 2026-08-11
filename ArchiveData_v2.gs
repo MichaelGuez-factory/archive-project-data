@@ -122,14 +122,16 @@ function archiveData_v2() {
     { name: "Archive Quotes", action: () => archiveQuotes_v2(scoroIdsToArchive) },
     { name: "Archive Routing", action: () => archiveRouting_v2(scoroIdsToArchive) },
     { name: "Archive Items", action: () => archiveItems_v2(scoroIdsToArchive) },
-    { name: "Archive Installs", action: () => archiveInstalls_v2(thresholdDate, activeProjectList) },
+    // Quarantined: Installs archive is being rewritten, disabled for now.
+    // { name: "Archive Installs", action: () => archiveInstalls_v2(thresholdDate, activeProjectList) },
     { name: "Archive Resource Schedules", action: () => archiveProductionResourceSchedules_v2() },
     { name: "Archive Expenses", action: () => archiveTFNYCExpenses_v2(projectReferencesToArchive) },
     { name: "Archive Projects", action: () => archiveProjects_v2(scoroIdsToArchive) },
     { name: "Remove Quotes", action: () => removeQuotes_v2(scoroIdsToArchive) },
     { name: "Remove Routing", action: () => removeRouting_v2(scoroIdsToArchive) },
     { name: "Remove Expenses", action: () => removeExpenses_v2(projectReferencesToArchive) },
-    { name: "Remove Installs", action: () => removeInstalls_v2(thresholdDate, activeProjectList) },
+    // Quarantined: Installs removal is being rewritten, disabled for now.
+    // { name: "Remove Installs", action: () => removeInstalls_v2(thresholdDate, activeProjectList) },
     { name: "Remove Projects", action: () => removeProjects_v2(scoroIdsToArchive) }
   ];
 
@@ -155,7 +157,8 @@ function runDiagnostics() {
   
   const sources = [
     { id: "1OSgoq-4TDjud6WbSAfK1LPBT4FO4xB7sbwmDE4Mt5B8", name: "Pdata_Active Projects", tabs: ["Projects", "Quote Export", "Quotes", "Routing Data Export_2", "Routing", "Item Data Export", "Project Export"] },
-    { id: "18o-aMpo4cLMh-g6P0iyqjLFyfACzXAGZVI7di5g-8t4", name: "TFNYC Install Schedule Utility", tabs: ["Install Schedule"] },
+    // Quarantined: Install schedule is no longer a data source
+    // { id: "18o-aMpo4cLMh-g6P0iyqjLFyfACzXAGZVI7di5g-8t4", name: "TFNYC Install Schedule Utility", tabs: ["Install Schedule"] },
     { id: "1bZmaAAXqfWUTC80I1F2_VVEN7jAKynRV_BywNGF0kK8", name: "Fabrication Schedule Utility_v202", tabs: ["Production Staff Schedule Export"] },
     { id: "1XyLOuaQ-bxwz2TI-ORutxp3RHo6h6srHMaiaj3c49lM", name: "Pdata_Collected Schedules", tabs: ["Production Staff Schedule_Past"] },
     { id: "1znzFr87-_EqkxfvribcZNimweO9r99tj2Q_RU_nIKxc", name: "Pdata_CollectedProjectBudgets", tabs: ["Active Project Budget Export"] },

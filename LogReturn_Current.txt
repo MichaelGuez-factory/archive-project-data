@@ -1,0 +1,51 @@
+=== STARTING WORKFLOW DIAGNOSTICS ===
+11:57:48 AM	Info	
+--- Diagnosing: Pdata_Active Projects (ID: 1OSgoq-4TDjud6WbSAfK1LPBT4FO4xB7sbwmDE4Mt5B8) ---
+11:57:48 AM	Info	[DEBUG] Opening spreadsheet: "Pdata_Active Projects" (ID: 1OSgoq-4TDjud6WbSAfK1LPBT4FO4xB7sbwmDE4Mt5B8)...
+11:57:48 AM	Info	[DEBUG] Successfully opened "Pdata_Active Projects" in 249ms
+11:57:48 AM	Info	[PASS] Opened spreadsheet successfully.
+11:57:48 AM	Info	  [PASS] Tab "Projects" found. Dimensions: MaxRows=762, LastRow=762, MaxCols=30, LastCol=16
+11:57:48 AM	Info	  [PASS] Tab "Quote Export" found. Dimensions: MaxRows=1000, LastRow=51, MaxCols=11, LastCol=10
+11:57:49 AM	Info	  [PASS] Tab "Quotes" found. Dimensions: MaxRows=974, LastRow=974, MaxCols=25, LastCol=14
+11:57:49 AM	Info	  [PASS] Tab "Routing Data Export_2" found. Dimensions: MaxRows=31453, LastRow=31453, MaxCols=30, LastCol=24
+11:57:49 AM	Info	  [PASS] Tab "Routing" found. Dimensions: MaxRows=2849, LastRow=2849, MaxCols=24, LastCol=23
+11:57:50 AM	Info	  [PASS] Tab "Item Data Export" found. Dimensions: MaxRows=963, LastRow=963, MaxCols=25, LastCol=15
+11:57:50 AM	Info	  [PASS] Tab "Project Export" found. Dimensions: MaxRows=48896, LastRow=48896, MaxCols=62, LastCol=20
+11:57:50 AM	Info	
+--- Diagnosing: Fabrication Schedule Utility_v202 (ID: 1bZmaAAXqfWUTC80I1F2_VVEN7jAKynRV_BywNGF0kK8) ---
+11:57:50 AM	Info	[DEBUG] Opening spreadsheet: "Fabrication Schedule Utility_v202" (ID: 1bZmaAAXqfWUTC80I1F2_VVEN7jAKynRV_BywNGF0kK8)...
+11:57:50 AM	Info	[DEBUG] Successfully opened "Fabrication Schedule Utility_v202" in 284ms
+11:57:50 AM	Info	[PASS] Opened spreadsheet successfully.
+11:57:51 AM	Info	  [PASS] Tab "Production Staff Schedule Export" found. Dimensions: MaxRows=6621, LastRow=6621, MaxCols=14, LastCol=13
+11:57:51 AM	Info	
+--- Diagnosing: Pdata_Collected Schedules (ID: 1XyLOuaQ-bxwz2TI-ORutxp3RHo6h6srHMaiaj3c49lM) ---
+11:57:51 AM	Info	[DEBUG] Opening spreadsheet: "Pdata_Collected Schedules" (ID: 1XyLOuaQ-bxwz2TI-ORutxp3RHo6h6srHMaiaj3c49lM)...
+11:57:51 AM	Info	[DEBUG] Successfully opened "Pdata_Collected Schedules" in 193ms
+11:57:51 AM	Info	[PASS] Opened spreadsheet successfully.
+11:57:51 AM	Info	  [PASS] Tab "Production Staff Schedule_Past" found. Dimensions: MaxRows=11115, LastRow=11115, MaxCols=17, LastCol=14
+11:57:51 AM	Info	
+--- Diagnosing: Pdata_CollectedProjectBudgets (ID: 1znzFr87-_EqkxfvribcZNimweO9r99tj2Q_RU_nIKxc) ---
+11:57:51 AM	Info	[DEBUG] Opening spreadsheet: "Pdata_CollectedProjectBudgets" (ID: 1znzFr87-_EqkxfvribcZNimweO9r99tj2Q_RU_nIKxc)...
+11:57:51 AM	Info	[DEBUG] Successfully opened "Pdata_CollectedProjectBudgets" in 294ms
+11:57:51 AM	Info	[PASS] Opened spreadsheet successfully.
+11:57:52 AM	Info	  [PASS] Tab "Active Project Budget Export" found. Dimensions: MaxRows=1502, LastRow=1502, MaxCols=23, LastCol=14
+11:57:52 AM	Info	
+--- Diagnosing: PM Project Utility_v11P1 (ID: 1CnoKvQLvCOiOjwqnBOdHN8EZ6N2yzLE5QwYB7g8nVkU) ---
+11:57:52 AM	Info	[DEBUG] Opening spreadsheet: "PM Project Utility_v11P1" (ID: 1CnoKvQLvCOiOjwqnBOdHN8EZ6N2yzLE5QwYB7g8nVkU)...
+11:57:52 AM	Info	[DEBUG] Successfully opened "PM Project Utility_v11P1" in 345ms
+11:57:52 AM	Info	[PASS] Opened spreadsheet successfully.
+11:57:52 AM	Info	  [PASS] Tab "Project Materials  & Services Tracking" found. Dimensions: MaxRows=97, LastRow=97, MaxCols=15, LastCol=11
+11:57:52 AM	Info	
+--- Diagnosing: Pdata_Project Archive_Current (ID: 1E7RJn0eo2ZQ7nul1v3iS7DH57esvP_GhsO7tEOBwDWI) ---
+11:57:52 AM	Info	[DEBUG] Opening spreadsheet: "Pdata_Project Archive_Current" (ID: 1E7RJn0eo2ZQ7nul1v3iS7DH57esvP_GhsO7tEOBwDWI)...
+11:57:55 AM	Info	[DEBUG] Successfully opened "Pdata_Project Archive_Current" in 2442ms
+11:57:55 AM	Info	[PASS] Opened spreadsheet successfully.
+11:57:55 AM	Info	  [PASS] Tab "Quotes" found. Dimensions: MaxRows=508, LastRow=508, MaxCols=12, LastCol=11
+11:57:55 AM	Info	  [PASS] Tab "Routing" found. Dimensions: MaxRows=7697, LastRow=7697, MaxCols=28, LastCol=27
+11:57:55 AM	Info	  [PASS] Tab "Items" found. Dimensions: MaxRows=2278, LastRow=1663, MaxCols=15, LastCol=14
+11:57:55 AM	Info	  [PASS] Tab "Installs" found. Dimensions: MaxRows=459, LastRow=231, MaxCols=19, LastCol=18
+11:57:56 AM	Info	  [PASS] Tab "Archived Project Expenses" found. Dimensions: MaxRows=2292, LastRow=2292, MaxCols=25, LastCol=16
+11:57:56 AM	Info	  [PASS] Tab "Projects" found. Dimensions: MaxRows=555, LastRow=184, MaxCols=34, LastCol=22
+11:57:56 AM	Info	  [PASS] Tab "PreProduction Staff Schedule" found. Dimensions: MaxRows=609, LastRow=595, MaxCols=13, LastCol=12
+11:57:56 AM	Info	
+=== DIAGNOSTICS COMPLETE ===

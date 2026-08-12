@@ -143,17 +143,21 @@ function removeExpenses_v2(projectReferencesToArchive) {
       }
 
       if (dataToRemove.length > 0) {
-
-        for (i = collectedData.length + sourceSheetFirstRowNumber; i >= sourceSheetFirstRowNumber; i--) {
-
-          const rowData = sheet.getRange(i, sourceSheetFirstColumnNumber, 1, sourceSheetTotalColumnCount).getValues();
-
-          let projectReference = rowData[0][0];
-
-          if (projectReferencesToArchive.includes(projectReference)) {
-            Logger.log(`Removing row:  ${rowData}`);
-            sheet.deleteRow(i);
-          }
+        Logger.log(`Rebuilding active range to remove ${dataToRemove.length} expense rows (retaining ${dataToRetain.length} rows)...`);
+        
+        // Clear columns B to K (Columns 2 to 11) for all data rows to avoid leaving leftover rows.
+        // We clear collectedData.length + 10 rows to be safe and ensure any trailing rows are blanked out.
+        sheet.getRange(sourceSheetFirstRowNumber, sourceSheetFirstColumnNumber, collectedData.length + 10, sourceSheetTotalColumnCount).clearContent();
+        
+        // Pause briefly to let Sheets catch up
+        Utilities.sleep(1000);
+        
+        // Write back only the retained data
+        if (dataToRetain.length > 0) {
+          sheet.getRange(sourceSheetFirstRowNumber, sourceSheetFirstColumnNumber, dataToRetain.length, sourceSheetTotalColumnCount).setValues(dataToRetain);
+          Logger.log(`Successfully rewrote ${dataToRetain.length} retained expense rows.`);
+        } else {
+          Logger.log(`All expense rows were removed; active range is now empty.`);
         }
       }
 
